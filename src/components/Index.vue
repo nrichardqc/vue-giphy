@@ -7,6 +7,9 @@
             </p>
             <input type="submit"/>
         </form>
+        <div v-if="loading">
+            <img src="../assets/loading.gif" alt="loading"/>
+        </div>
         <div class="images-list">
             <image-card v-for="(item, index) in gifObjects" :key="index" :url="item.images.downsized.url" :title="item.title"/>
         </div>
@@ -24,7 +27,8 @@ export default {
   },
   data: () => ({
     gifObjects: [],
-    keywords: ''
+    keywords: '',
+    loading: true
   }),
   methods: {
     search () {
@@ -36,6 +40,7 @@ export default {
       api.getTrending().then(
         res => {
           this.$data.gifObjects.push.apply(this.$data.gifObjects, res.data.data)
+          this.$data.loading = false
         }
       )
     }
@@ -53,4 +58,5 @@ export default {
     flex-direction: row;
     justify-content: center;
 }
+
 </style>

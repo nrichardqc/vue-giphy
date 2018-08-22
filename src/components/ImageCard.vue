@@ -4,7 +4,7 @@
             img-alt="Image"
             img-top
             style="max-width: 20rem;"
-            class="mb-2">
+            class="image-card">
     </b-card>
 </template>
 
@@ -24,5 +24,7 @@ export default {
 </script>
 
 <style scoped>
-
+.image-card {
+    margin : 20px;
+}
 </style>
