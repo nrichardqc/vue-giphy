@@ -4,7 +4,9 @@
             img-alt="Image"
             img-top
             style="max-width: 20rem;"
-            class="image-card">
+            class="image-card"
+            v-on:click="click"
+            v-bind:class="{'bg-info': isFavorite, 'text-white': isFavorite}">
     </b-card>
 </template>
 
@@ -16,10 +18,33 @@ export default {
   components: {
     bCard
   },
-  props: ['url', 'title'],
-  data: () => ({
-    isLoading: true
-  })
+  props: [
+    'id',
+    'url',
+    'title'
+  ],
+  data: function () {
+    return {
+      isFavorite: false
+    }
+  },
+  mounted () {
+    this.isFavorite = localStorage[this.id]
+  },
+  watch: {
+    isFavorite (newValue) {
+      if (newValue) {
+        localStorage[this.id] = true
+      } else {
+        localStorage.removeItem(this.id)
+      }
+    }
+  },
+  methods: {
+    click: function (event) {
+      this.isFavorite = !this.isFavorite
+    }
+  }
 }
 </script>
 

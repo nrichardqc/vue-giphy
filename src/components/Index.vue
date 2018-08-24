@@ -10,6 +10,7 @@
             <image-card
                     v-for="(item, index) in gifObjects"
                     :key="index"
+                    :id="item.id"
                     :url="item.images['fixed_width'].url"
                     :title="item.title"/>
         </div>
