@@ -1,9 +1,10 @@
 <template>
     <div>
-        <b-button to="search">
-            Search
-        </b-button>
-        <div v-if="loading">
+        <h2>Search</h2>
+        <p>
+            <input type="text" id="keywords" name="keywords" v-on:input="search" placeholder="Keywords">
+        </p>
+        <div v-if="searching">
             <img src="../assets/loading.gif" alt="loading"/>
         </div>
         <div class="images-list">
@@ -19,30 +20,30 @@
 <script>
 import api from './../api'
 import ImageCard from './ImageCard'
-import bButton from 'bootstrap-vue/es/components/button/button'
+import debounce from 'lodash.debounce'
 
 export default {
-  name: 'Index',
+  name: 'Search',
   components: {
-    ImageCard,
-    bButton
+    ImageCard
   },
   data: () => ({
     gifObjects: [],
-    loading: true
+    searching: false
   }),
   methods: {
-    fetchData () {
-      api.getTrending().then(
+    search: debounce(function (e) {
+      this.searching = true
+      this.gifObjects.length = 0
+      console.log('Searching for ' + e.target.value)
+
+      api.search(e.target.value).then(
         res => {
           this.$data.gifObjects.push.apply(this.$data.gifObjects, res.data.data)
-          this.$data.loading = false
+          this.$data.searching = false
         }
       )
-    }
-  },
-  created () {
-    this.fetchData()
+    }, 500)
   }
 }
 </script>
@@ -54,4 +55,5 @@ export default {
     flex-direction: row;
     justify-content: center;
 }
+
 </style>

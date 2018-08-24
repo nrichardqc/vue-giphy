@@ -23,4 +23,22 @@ function getTrending (resolve, reject) {
   )
 }
 
-export default {getTrending}
+function search (keywords) {
+  return new Promise((resolve, reject) => {
+    axios.get(
+      'search',
+      {
+        params: {
+          api_key: process.env.GIPHY_API_KEY,
+          limit: 5,
+          q: keywords,
+          fmt: 'json'
+        }
+      })
+      .then(res => resolve(res))
+      .catch(err => reject(err))
+  }
+  )
+}
+
+export default {getTrending, search}
