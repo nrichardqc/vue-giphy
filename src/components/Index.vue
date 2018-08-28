@@ -39,7 +39,10 @@ export default {
           this.$data.gifObjects.push.apply(this.$data.gifObjects, res.data.data)
           this.$data.loading = false
         }
-      )
+      ).catch(err => {
+        console.log(err)
+        this.$data.loading = false
+      })
     }
   },
   created () {

@@ -43,7 +43,10 @@ export default {
           this.$data.gifObjects.push.apply(this.$data.gifObjects, res.data.data)
           this.$data.searching = false
         }
-      )
+      ).catch(err => {
+        console.log(err)
+        this.$data.searching = false
+      })
     }, 500)
   }
 }
