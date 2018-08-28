@@ -2,7 +2,7 @@
     <div>
         <h2>Search</h2>
         <p>
-            <input type="text" id="keywords" name="keywords" v-on:input="search" placeholder="Keywords">
+            <input type="text" v-model="keywords" placeholder="Keywords">
         </p>
         <div v-if="searching">
             <img src="../assets/loading.gif" alt="loading"/>
@@ -30,15 +30,26 @@ export default {
   },
   data: () => ({
     gifObjects: [],
+    keywords: '',
     searching: false
   }),
+  watch: {
+    keywords: function (newValue, oldValue){
+      // Inspired by https://vuejs.org/v2/guide/computed.html#Watchers
+      this.searching = true
+      this.debouncedSearch()
+    }
+  },
+  created: function () {
+    this.debouncedSearch = debounce(this.search, 500)
+  },
   methods: {
-    search: debounce(function (e) {
+    search: function () {
       this.searching = true
       this.gifObjects.length = 0
-      console.log('Searching for ' + e.target.value)
+      console.log('Searching for ' + this.keywords)
 
-      api.search(e.target.value).then(
+      api.search(this.keywords).then(
         res => {
           this.$data.gifObjects.push.apply(this.$data.gifObjects, res.data.data)
           this.$data.searching = false
@@ -47,7 +58,7 @@ export default {
         console.log(err)
         this.$data.searching = false
       })
-    }, 500)
+    }
   }
 }
 </script>
