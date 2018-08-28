@@ -34,7 +34,7 @@ export default {
     searching: false
   }),
   watch: {
-    keywords: function (newValue, oldValue){
+    keywords: function (newValue, oldValue) {
       // Inspired by https://vuejs.org/v2/guide/computed.html#Watchers
       this.searching = true
       this.debouncedSearch()
