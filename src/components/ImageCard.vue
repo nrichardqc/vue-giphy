@@ -1,35 +1,54 @@
 <template>
     <b-card :title="title"
-            :img-src="url"
-            img-alt="Image"
-            img-top
-            style="max-width: 20rem;"
             class="image-card"
             v-on:click="click"
             v-bind:class="{'bg-info': isFavorite, 'text-white': isFavorite}">
+
+        <b-card-body class="image-card-body">
+            <div class="loadingImage"
+                 :style="{backgroundImage: 'url(' + placeholder + ')'}">
+            </div>
+            <div class="overlay" :style="{backgroundImage : 'url(' + overlayUrl + ')', opacity: overlayOpacity}"></div>
+        </b-card-body>
     </b-card>
 </template>
 
 <script>
 import bCard from 'bootstrap-vue/es/components/card/card'
+import bCardBody from 'bootstrap-vue/es/components/card/card-body'
 
 export default {
   name: 'image-card',
   components: {
-    bCard
+    bCard,
+    bCardBody
   },
   props: [
     'id',
     'url',
-    'title'
+    'title',
+    'placeholder'
   ],
   data: function () {
     return {
-      isFavorite: false
+      isFavorite: false,
+      overlayOpacity: 0,
+      overlayUrl: null
     }
+  },
+  created () {
   },
   mounted () {
     this.isFavorite = localStorage[this.id]
+
+    // Progressive image loading, inspired by
+    // https://codepen.io/philsanders/pen/VPYmYN
+    let image = new Image()
+    image.onload = () => {
+      this.overlayUrl = this.url
+      this.overlayOpacity = 1
+    }
+    image.src = this.url
   },
   watch: {
     isFavorite (newValue) {
@@ -41,7 +60,7 @@ export default {
     }
   },
   methods: {
-    click: function (event) {
+    click: function () {
       this.isFavorite = !this.isFavorite
     }
   }
@@ -51,5 +70,27 @@ export default {
 <style scoped>
 .image-card {
     margin : 20px;
+    max-width: 20rem;
+}
+
+.image-card-body {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-card-body div {
+    width: 100%;
+    padding-top: 100%;
+}
+
+.image-card-body .loadingImage {
+    filter: blur(5px);
+}
+
+.image-card-body .overlay {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 200ms ease-in;
 }
 </style>
