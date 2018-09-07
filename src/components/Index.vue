@@ -11,7 +11,8 @@
                     v-for="(item, index) in gifObjects"
                     :key="index"
                     :id="item.id"
-                    :url="item.images['fixed_width'].url"
+                    :url="item.images['original'].url"
+                    :placeholder="item.images['original_still'].url"
                     :title="item.title"/>
         </div>
     </div>

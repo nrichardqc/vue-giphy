@@ -12,7 +12,8 @@
                     v-for="(item, index) in gifObjects"
                     :key="index"
                     :id="item.id"
-                    :url="item.images['fixed_width'].url"
+                    :url="item.images['original'].url"
+                    :placeholder="item.images['original_still'].url"
                     :title="item.title"/>
         </div>
     </div>
@@ -37,6 +38,7 @@ export default {
     keywords: function (newValue, oldValue) {
       // Inspired by https://vuejs.org/v2/guide/computed.html#Watchers
       this.searching = true
+      this.gifObjects.length = 0
       this.debouncedSearch()
     }
   },
@@ -45,8 +47,6 @@ export default {
   },
   methods: {
     search: function () {
-      this.searching = true
-      this.gifObjects.length = 0
       console.log('Searching for ' + this.keywords)
 
       api.search(this.keywords).then(
