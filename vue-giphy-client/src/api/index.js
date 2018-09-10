@@ -2,21 +2,13 @@ import Axios from 'axios'
 
 const axios = Axios.create(
   {
-    baseURL: 'http://api.giphy.com/v1/gifs/'
+    baseURL: 'http://' + process.env.VUE_GIPHY_API_HOST
   }
 )
 
 function getTrending (resolve, reject) {
   return new Promise((resolve, reject) => {
-    axios.get(
-      'trending',
-      {
-        params: {
-          api_key: process.env.GIPHY_API_KEY,
-          limit: 5,
-          fmt: 'json'
-        }
-      })
+    axios.get('/')
       .then(res => resolve(res))
       .catch(err => reject(err))
   }
@@ -29,10 +21,7 @@ function search (keywords) {
       'search',
       {
         params: {
-          api_key: process.env.GIPHY_API_KEY,
-          limit: 5,
-          q: keywords,
-          fmt: 'json'
+          q: keywords
         }
       })
       .then(res => resolve(res))
