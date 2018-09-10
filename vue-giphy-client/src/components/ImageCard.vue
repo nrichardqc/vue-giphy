@@ -5,10 +5,8 @@
             v-bind:class="{'bg-info': isFavorite, 'text-white': isFavorite}">
 
         <b-card-body class="image-card-body">
-            <div class="loadingImage"
-                 :style="{backgroundImage: 'url(' + placeholder + ')'}">
-            </div>
-            <div class="overlay" :style="{backgroundImage : 'url(' + overlayUrl + ')', opacity: overlayOpacity}"></div>
+            <img class="loadingImage" :src="placeholder" :alt="title"/>
+            <img class="overlay" :src="overlayUrl" :style="{opacity: overlayOpacity}"/>
         </b-card-body>
     </b-card>
 </template>
@@ -78,19 +76,21 @@ export default {
     overflow: hidden;
 }
 
-.image-card-body div {
-    width: 100%;
-    padding-top: 100%;
+.image-card-body img {
+    display: block;
 }
 
 .image-card-body .loadingImage {
     filter: blur(5px);
+    width: 100%;
 }
 
 .image-card-body .overlay {
     position: absolute;
-    top: 0;
+    top: 1.25rem;
+    left: 1.25rem;
     opacity: 0;
+    width: calc(100% - 2.5rem);
     transition: opacity 200ms ease-in;
 }
 </style>
