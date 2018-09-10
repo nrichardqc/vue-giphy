@@ -3,7 +3,6 @@ let logger = require('morgan')
 require('dotenv').load()
 
 let indexRouter = require('./routes/index')
-let usersRouter = require('./routes/users')
 
 let app = express()
 

@@ -9,7 +9,6 @@
     "lint": "eslint --ext .js . app.js"
   },
   "dependencies": {
-    "cookie-parser": "~1.4.3",
     "debug": "~2.6.9",
     "dotenv": "^6.0.0",
     "express": "~4.16.0",
