@@ -2,7 +2,7 @@
     <div>
         <h2>Search</h2>
         <p>
-            <input type="text" v-model="keywords" placeholder="Keywords">
+            <input ref="keywords" type="text" v-model="keywords" placeholder="Keywords">
         </p>
         <div v-if="searching">
             <img src="../assets/loading.gif" alt="loading"/>
@@ -44,6 +44,9 @@ export default {
   },
   created: function () {
     this.debouncedSearch = debounce(this.search, 500)
+  },
+  mounted: function () {
+    this.$nextTick(() => this.$refs.keywords.focus())
   },
   methods: {
     search: function () {
