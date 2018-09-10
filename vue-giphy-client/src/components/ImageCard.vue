@@ -69,28 +69,29 @@ export default {
 .image-card {
     margin : 20px;
     max-width: 20rem;
+    min-height: 5rem;
 }
 
 .image-card-body {
     position: relative;
     overflow: hidden;
+    padding:0;
+    margin:1.25rem;
 }
 
 .image-card-body img {
     display: block;
+    width: 100%;
 }
 
 .image-card-body .loadingImage {
     filter: blur(5px);
-    width: 100%;
 }
 
 .image-card-body .overlay {
     position: absolute;
-    top: 1.25rem;
-    left: 1.25rem;
     opacity: 0;
-    width: calc(100% - 2.5rem);
+    top: 0;
     transition: opacity 200ms ease-in;
 }
 </style>
