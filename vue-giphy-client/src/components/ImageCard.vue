@@ -34,8 +34,6 @@ export default {
       overlayUrl: null
     }
   },
-  created () {
-  },
   mounted () {
     this.isFavorite = localStorage[this.id]
 
