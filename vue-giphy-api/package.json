@@ -1,7 +1,7 @@
 {
   "name": "vue-giphy-api",
   "version": "1.0.0",
-  "description": "A Vue.js project showing Giphy images",
+  "description": "Simple Node.js proxy to GIPHY API",
   "author": "Nicolas Richard <nrichard@cegepgarneau.ca>",
   "private": true,
   "scripts": {
