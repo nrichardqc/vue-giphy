@@ -1,6 +1,7 @@
-# vue-giphy-pi
+# vue-giphy-api
 
-> A Vue.js project showing Giphy images
+> A simple **Node.js** proxy to redirect calls to [GIPHY API](https://developers.giphy.com/docs/) 
+and hiding an API key.
 
 ## Build Setup
 
