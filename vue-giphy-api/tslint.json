@@ -1,0 +1,20 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "linterOptions": {
+        "exclude": [
+            "bin",
+            "build",
+            "lib/*generated.js",
+            "**/*.js"
+        ]
+    },
+    "jsEnable": false,
+    "jsRules": {},
+    "rules": {
+        "semicolon": [true, "never"]
+    },
+    "rulesDirectory": []
+}
