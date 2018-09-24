@@ -14,6 +14,7 @@ A single page app in **Vue.js** to show GIFs retreived through _vue-giphy-api_.
 ## To start
 Do the following command in each project's folder:
 ```
+npm install
 npm run build
 npm run start
 ```
